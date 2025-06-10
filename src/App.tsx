@@ -1,7 +1,8 @@
-import { useState, useRef, useEffect, useContext } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
+import { OrbitControls, Stars, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 // import { FirstPersonControls } from '@react-three/drei';
 // import { getFresnelMat } from './util/fresnel.ts';
 
@@ -13,7 +14,7 @@ import fs from '../shaders/fs.glsl'
 import vs from '../shaders/vs.glsl'
 
 function Lights() {
-  const lightsMap = useLoader(THREE.TextureLoader, 'earth10k/earthlights10k.jpg');
+  const lightsMap = useLoader(THREE.TextureLoader, 'earth4k/earthlights4k.jpg');
 
   return (
     // <mesh rotation={[0, 0, -23.5 * Math.PI / 180]}>
@@ -123,43 +124,88 @@ function placePointOnGlobe(latitude: number, longitude: number, radius: number =
   return new THREE.Vector3(x, z, y);  // y is the lateral axis in Three.js
 }
 
-function Marker({ sh, color, latitude, longitude }: { sh: (a:boolean) => void, color:string, latitude: number, longitude: number }) {
+function Marker({ sh, color, latitude, longitude, st, name }: { sh: (a: boolean) => void, color: string, name: string, st: (n: string) => void, latitude: number, longitude: number }) {
   const position = placePointOnGlobe(latitude, longitude);
   const ref = useRef<THREE.Mesh>(null!);
 
+  const result = useLoader(GLTFLoader, 'marker.glb');
+
   // Update the rotation to make the box face the normal vector
-  useFrame(() => {
-    if (ref.current) {
-      const normal = position.clone().normalize();  // The normal is just the position on the sphere
-      ref.current.lookAt(normal);  // Make the box face the normal vector
-      console.log(normal)
-    }
-  });
+  // useFrame(() => {
+  if (ref.current) {
+    ref.current.lookAt(new THREE.Vector3(0, 0, 0))
+  }
+  // });
 
   return (
     <>
-      <mesh position={position} ref={ref} onPointerOver={(e) => {
+      <mesh position={position} ref={ref} onPointerOver={() => {
         sh(true);
-        // sp(e)
+        st(name)
       }}
-      onPointerOut={() => {
-        sh(false)
-      }}
+        onPointerOut={() => {
+          sh(false)
+        }}
       >
         <boxGeometry args={[0.01, 0.01, 0.1]} />
         <meshBasicMaterial color={color} transparent />
       </mesh>
+      {/* <primitive ref={ref} position={position} object={result.scene}></primitive> */}
 
     </>
   );
 }
 
+function MyStars() {
+  const ref = useRef<THREE.Points>(null!);
+  const starVertices = useMemo(() => {
+    const vertices = [];
+    for (let i = 0; i < 10000; i++) {
+      const x = (Math.random() - 0.5) * 2000;
+      const y = (Math.random() - 0.5) * 2000;
+      const z = -Math.random() * 2000;
+      vertices.push(x, y, z);
+    }
+    return new Float32Array(vertices);
+  }, []); // only run once
 
-function EarthG({sh, sp}: { sh:(a:boolean) => void, sp: (a:MouseEvent)=> void }) {
-  const ref = useRef<THREE.Group>(null!)
-  useFrame(() => {
-    // ref.current.rotation.y += 0.001;
+  useFrame(()=>{
+    ref.current.rotation.y -= 0.0001;
   });
+
+  return (
+    <>
+      <points ref={ref}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            args={[new Float32Array(starVertices), 3]}
+            // array={new Float32Array(starVertices)}
+            // count={starVertices.length / 3}
+            // itemSize={3}
+            // args={[new Float32Array(starVertices), 3]}
+          /></bufferGeometry>
+        <pointsMaterial color={0xffffff}></pointsMaterial>
+      </points>
+    </>
+  )
+}
+
+function EarthG({ sh, st }: { sh: (a: boolean) => void }) {
+  const ref = useRef<THREE.Group>(null!)
+
+  useFrame(() => {
+    ref.current.rotation.y += 0.001;
+  });
+
+  // if (ref.current) {
+  //   gsap.to(ref.current.rotation, {
+  //     // x: -1*pos.y * 0.5,
+  //     y: pos.x * 0.5,
+  //     duration: 1,
+  //   });
+  // }
+
   return (
     <group ref={ref}>
       <Animated />
@@ -168,9 +214,9 @@ function EarthG({sh, sp}: { sh:(a:boolean) => void, sp: (a:MouseEvent)=> void })
       <Shader />
       <Aura />
       {/* <Marker sh={sh} sp={sp} latitude={34} longitude={60}/> */} {/** rochester location with tilt */}
-      <Marker sh={sh} color='hotpink' latitude={41} longitude={74}/>
+      <Marker sh={sh} st={st} name={'Home in New York City'} color='red' latitude={41} longitude={74} />
 
-      <Marker sh={sh} color='teal' latitude={43} longitude={76}/>
+      <Marker sh={sh} st={st} name={'School in Rochester'} color='orange' latitude={42.5} longitude={76.8} />
     </group>
   );
 }
@@ -251,39 +297,45 @@ function EarthG({sh, sp}: { sh:(a:boolean) => void, sp: (a:MouseEvent)=> void })
 
 function App() {
   const [hovered, setHovered] = useState(false);
-  const [position, setPosition] = useState({x:0, y:100});
+  interface MousePosition {
+    x: number;
+    y: number;
+  }
+  const [position, setPosition] = useState<MousePosition>({ x: 0, y: 100 });
+  const [text, setText] = useState<string>('');
+
   const ref = useRef<HTMLDivElement>(null!);
 
-  const handleMouseMove = (event) => {
-    setPosition({x: event.clientX, y: event.clientY});
-    // console.log(`Mouse position: ${event.clientX}, ${event.clientY}`);
+  const handleMouseMove = (event: MouseEvent) => {
+    setPosition({ x: event.clientX, y: event.clientY });
   }
 
   return (
-    <div id="canvas-container" style={{ width: '100vw', height: '100vh', overflow: 'hidden' }} ref={ref}>
-      <Canvas camera={{ position: [2, 2, 2] }} style={{ backgroundColor: 'black' }} onMouseMove={(e) => handleMouseMove(e)}>
+    <div id="canvas-container" style={{ width: '100vw', height: '100vh', overflow: 'hidden' }} ref={ref}
+      onMouseMove={(e) => handleMouseMove(e)}
+    >
+      <Canvas camera={{ position: [1, 0, 2] }} style={{ backgroundColor: 'black' }}
+        >
         {/* <Canvas dpr={window.devicePixelRatio} camera={{ position: [0, 0, 13] }} style={{ backgroundColor: 'black' }}> */}
-        <EarthG sh={setHovered} sp={handleMouseMove}/>
+        <EarthG sh={setHovered} sp={handleMouseMove} st={setText} />
+        <MyStars />
         {/* <axesHelper args={[5]} /> */}
         {/* <gridHelper></gridHelper> */}
-        <OrbitControls />
-        <Stars />
+        {/* <OrbitControls /> */}
+        {/* <Stars /> */}
         <directionalLight position={[0, 10, 20]} intensity={1.5} />
       </Canvas>
-        <div style={{
+      <div style={{
         display: hovered ? 'inline-block' : 'none',
         transform: `translate(${position.x}px, ${position.y - window.innerHeight}px)`,
         transformOrigin: "top left",
-        // position: 'absolute',
-        // left: position.x,
-        // top: position.y,
         backgroundColor: 'rgba(0,0,0,0.8)',
         color: 'white',
         padding: '5px 10px',
         borderRadius: '8px'
-        }}
-        >
-        Home in New York City
+      }}
+      >
+        {text}
       </div>
     </div>
   );
