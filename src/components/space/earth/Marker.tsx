@@ -41,7 +41,7 @@ function Marker({ color, latitude, longitude, markerCaption, markerHeight=0.2 }:
 				setMarkerHovered(false)
 			}}
 		>
-			<boxGeometry args={[0.01, 0.01, markerHeight]} />
+			<boxGeometry args={[0.02, 0.02, markerHeight]} />
 			<meshBasicMaterial color={color} opacity={0.5} transparent/> {/* Keyword transparent must be called for opacity to work */}
 		</mesh>
 	);
