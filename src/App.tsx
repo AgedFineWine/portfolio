@@ -1,17 +1,12 @@
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
-import { OrbitControls, Stars, useGLTF } from '@react-three/drei';
+import { OrbitControls } from '@react-three/drei';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-// import { FirstPersonControls } from '@react-three/drei';
-// import { getFresnelMat } from './util/fresnel.ts';
 
-import fragmentShader from '../shaders/fragment.glsl'
-import vertexShader from '../shaders/vertex.glsl'
-import atmosphereFragmentShader from '../shaders/atmosphereFragment.glsl'
-import atmosphereVertexShader from '../shaders/atmosphereVertex.glsl'
-import fs from '../shaders/fs.glsl'
-import vs from '../shaders/vs.glsl'
+import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl'
+import atmosphereVertexShader from './shaders/atmosphereVertex.glsl'
+import fs from './shaders/fs.glsl'
+import vs from './shaders/vs.glsl'
 
 function Lights() {
   const lightsMap = useLoader(THREE.TextureLoader, 'earth4k/earthlights4k.jpg');
