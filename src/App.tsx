@@ -124,11 +124,11 @@ function placePointOnGlobe(latitude: number, longitude: number, radius: number =
   return new THREE.Vector3(x, z, y);  // y is the lateral axis in Three.js
 }
 
-function Marker({ sh, color, latitude, longitude, st, name }: { sh: (a: boolean) => void, color: string, name: string, st: (n: string) => void, latitude: number, longitude: number }) {
+function Marker({ r, sh, color, latitude, longitude, st, name }: { sh: (a: boolean) => void, color: string, name: string, st: (n: string) => void, latitude: number, longitude: number }) {
   const position = placePointOnGlobe(latitude, longitude);
   const ref = useRef<THREE.Mesh>(null!);
 
-  const result = useLoader(GLTFLoader, 'marker.glb');
+  // const result = useLoader(GLTFLoader, 'marker.glb');
 
   // Update the rotation to make the box face the normal vector
   // useFrame(() => {
@@ -142,13 +142,15 @@ function Marker({ sh, color, latitude, longitude, st, name }: { sh: (a: boolean)
       <mesh position={position} ref={ref} onPointerOver={() => {
         sh(true);
         st(name)
+        r()
       }}
         onPointerOut={() => {
           sh(false)
+          r()
         }}
       >
-        <boxGeometry args={[0.01, 0.01, 0.1]} />
-        <meshBasicMaterial color={color} transparent />
+        <boxGeometry args={[0.01, 0.01, 0.2]} />
+        <meshBasicMaterial color={color} opacity={0.7} />
       </mesh>
       {/* <primitive ref={ref} position={position} object={result.scene}></primitive> */}
 
@@ -163,13 +165,13 @@ function MyStars() {
     for (let i = 0; i < 10000; i++) {
       const x = (Math.random() - 0.5) * 2000;
       const y = (Math.random() - 0.5) * 2000;
-      const z = -Math.random() * 2000;
+      const z = (Math.random() - 0.5) * 2000;
       vertices.push(x, y, z);
     }
     return new Float32Array(vertices);
   }, []); // only run once
 
-  useFrame(()=>{
+  useFrame(() => {
     ref.current.rotation.y -= 0.0001;
   });
 
@@ -179,11 +181,8 @@ function MyStars() {
         <bufferGeometry>
           <bufferAttribute
             attach="attributes-position"
-            args={[new Float32Array(starVertices), 3]}
-            // array={new Float32Array(starVertices)}
-            // count={starVertices.length / 3}
-            // itemSize={3}
-            // args={[new Float32Array(starVertices), 3]}
+            args={[starVertices, 3]}
+
           /></bufferGeometry>
         <pointsMaterial color={0xffffff}></pointsMaterial>
       </points>
@@ -191,11 +190,11 @@ function MyStars() {
   )
 }
 
-function EarthG({ sh, st }: { sh: (a: boolean) => void }) {
+function EarthG({ h, sh, st }: { sh: (a: boolean) => void, h: boolean }) {
   const ref = useRef<THREE.Group>(null!)
 
   useFrame(() => {
-    ref.current.rotation.y += 0.001;
+    if (!h) ref.current.rotation.y += 0.001;
   });
 
   // if (ref.current) {
@@ -214,86 +213,57 @@ function EarthG({ sh, st }: { sh: (a: boolean) => void }) {
       <Shader />
       <Aura />
       {/* <Marker sh={sh} sp={sp} latitude={34} longitude={60}/> */} {/** rochester location with tilt */}
-      <Marker sh={sh} st={st} name={'Home in New York City'} color='red' latitude={41} longitude={74} />
+      <Marker sh={sh} st={st} name={'Home in New York City'} color={'red'} latitude={41} longitude={74} />
 
-      <Marker sh={sh} st={st} name={'School in Rochester'} color='orange' latitude={42.5} longitude={76.8} />
+      <Marker sh={sh} st={st} name={'School in Rochester'} color={'red'} latitude={42.5} longitude={76.8} />
     </group>
   );
 }
 
-// function Lights() {
-//   const lightsMap = useLoader(THREE.TextureLoader, 'earth4k/earthlights4k.jpg');
-//   return (
-//     <mesh >
-//       <sphereGeometry args={[5, 50, 50]} />
-//       <meshBasicMaterial map={lightsMap} blending={THREE.AdditiveBlending} />
-//     </mesh>
-//   );
-// }
 
-// function Map() {
-//   const Map = useLoader(THREE.TextureLoader, 'earth4k/earthmap4k.jpg');
-//   const bumpMap = useLoader(THREE.TextureLoader, 'earth4k/earthbump4k.jpg');
-//   const specularMap = useLoader(THREE.TextureLoader, 'earth4k/earthspec4k.jpg');
-//   return (
-//     <mesh >
-//       <sphereGeometry args={[5, 50, 50]} />
-//       <meshPhongMaterial map={Map} bumpMap={bumpMap} specularMap={specularMap}/>
-//     </mesh>
-//   );
-// }
+function DashedRing({ radius = 50, segments = 128 }) {
+  const line = useMemo(() => {
+    const curve = new THREE.EllipseCurve(
+      0, 0,        // ax, aY (center)
+      radius, radius, // xRadius, yRadius
+      0, 2 * Math.PI, // startAngle, endAngle
+      false,        // clockwise
+      0             // rotation
+    )
 
-// function EarthV2() {
-//   return (
-//     <>
-//       <mesh scale={1.05}>
-//         <sphereGeometry args={[5, 50, 50]} />
-//         <shaderMaterial
-//           vertexShader={vertexShader}
-//           fragmentShader={fragmentShader}
-//         // uniforms={{
-//         //   globeTexture: {
-//         //     value: new THREE.TextureLoader().load('earth4k/earthmap4k.jpg')
-//         //   },
-//         // }}
-//         >
-//         </shaderMaterial>
-//       </mesh>
-//     </>
-//   )
-// }
+    const points = curve.getPoints(segments)
+    const geometry = new THREE.BufferGeometry().setFromPoints(points)
 
-// function AtmosphereV2() {
-//   return (
-//     <>
-//       <mesh scale={[1.1, 1.1, 1.1]}>
-//         <sphereGeometry args={[5, 50, 50]} />
-//         <shaderMaterial
-//           vertexShader={atmosphereVertexShader}
-//           fragmentShader={atmosphereFragmentShader}
-//           blending={THREE.AdditiveBlending}
-//           side={THREE.BackSide}
-//         >
-//         </shaderMaterial>
-//       </mesh>
-//     </>
-//   )
-// }
+    const material = new THREE.LineDashedMaterial({
+      color: 0xffffff,
+      dashSize: 0.7,
+      gapSize: 0.2,
+    })
 
-// function Together() {
-//   const ref = useRef<THREE.Group>(null!);
-//   useFrame(() => {
-//     ref.current.rotation.y += 0.001;
-//   })
-//   return (
-//     <group ref={ref}>
-//       {/* <EarthV2 /> */}
-//       <Lights />
-//       <Map />
-//       {/* <AtmosphereV2 /> */}
-//     </group>
-//   )
-// }
+    const line = new THREE.Line(geometry, material)
+    line.computeLineDistances()
+    return line
+  }, [radius, segments])
+
+  return (
+    <primitive
+      position={[-50, 0, 0,]}
+      rotation={[Math.PI/2, 0, 0]}
+      object={line}
+      />
+  )
+}
+
+function Sun() {
+  return (
+    <>
+      <mesh position={[-50, 0, 0]}>
+        <sphereGeometry args={[2, 50, 50]} />
+        <meshBasicMaterial color={'yellow'} />
+      </mesh>
+    </>
+  )
+}
 
 function App() {
   const [hovered, setHovered] = useState(false);
@@ -315,15 +285,19 @@ function App() {
       onMouseMove={(e) => handleMouseMove(e)}
     >
       <Canvas camera={{ position: [1, 0, 2] }} style={{ backgroundColor: 'black' }}
-        >
+      >
         {/* <Canvas dpr={window.devicePixelRatio} camera={{ position: [0, 0, 13] }} style={{ backgroundColor: 'black' }}> */}
-        <EarthG sh={setHovered} sp={handleMouseMove} st={setText} />
+        <EarthG h={hovered} sh={setHovered} sp={handleMouseMove} st={setText} />
         <MyStars />
+        <DashedRing />
+        <Sun />
+
         {/* <axesHelper args={[5]} /> */}
         {/* <gridHelper></gridHelper> */}
-        {/* <OrbitControls /> */}
-        {/* <Stars /> */}
-        <directionalLight position={[0, 10, 20]} intensity={1.5} />
+        <OrbitControls />
+        {/* <directionalLight position={[0, 10, 20]} intensity={1.5} /> */}
+        {/* <directionalLight position={[-3.0, 4, 0.5]} intensity={3.5} /> */}
+        <directionalLight position={[0, 8, 8]} intensity={3.5} />
       </Canvas>
       <div style={{
         display: hovered ? 'inline-block' : 'none',
