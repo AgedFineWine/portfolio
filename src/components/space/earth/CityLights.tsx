@@ -1,8 +1,10 @@
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 
+import lights from '../../../assets/lights_4k.jpg'
+
 function Lights() {
-  const lightsMap = useLoader(THREE.TextureLoader, 'earth4k/earthlights4k.jpg');
+  const lightsMap = useLoader(THREE.TextureLoader, lights);
 
   return (
     // <mesh rotation={[0, 0, -23.5 * Math.PI / 180]}>

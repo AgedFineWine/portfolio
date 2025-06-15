@@ -3,12 +3,16 @@ import { useLoader } from '@react-three/fiber';
 
 import { useRef } from 'react';
 
+import earth from '../../../assets/earth_4k.jpg';
+import earthBump from '../../../assets/earthbump_4k.jpg';
+import earthSpec from '../../../assets/earthspec_4k.jpg';
+
 function BaseModel() {
   const earthRef = useRef<THREE.Mesh>(null!);
 
-  const colorMap = useLoader(THREE.TextureLoader, 'earth4k/earthmap4k.jpg');
-  const bumpMap = useLoader(THREE.TextureLoader, 'earth4k/earthbump4k.jpg');
-  const specularMap = useLoader(THREE.TextureLoader, 'earth4k/earthspec4k.jpg');
+  const colorMap = useLoader(THREE.TextureLoader, earth);
+  const bumpMap = useLoader(THREE.TextureLoader, earthBump);
+  const specularMap = useLoader(THREE.TextureLoader, earthSpec);
 
   return (
     // // Uncomment the line below to rotate the Earth model for the 23.5 degree tilt

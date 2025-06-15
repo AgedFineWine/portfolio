@@ -3,8 +3,10 @@ import { useLoader, useFrame } from '@react-three/fiber';
 
 import { useRef } from 'react';
 
+import clouds from '../../../assets/clouds_4k.jpg';
+
 function Clouds() {
-	const cloudMap = useLoader(THREE.TextureLoader, 'earthhiresclouds4K.jpg');
+	const cloudMap = useLoader(THREE.TextureLoader, clouds);
 	const cloudRef = useRef<THREE.Mesh>(null!);
 
 	useFrame(() => {
