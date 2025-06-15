@@ -8,7 +8,7 @@ function Stars() {
 
   const starVertices = useMemo(() => {
     const vertices = [];
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < 4000; i++) {
       const x = (Math.random() - 0.5) * 2000;
       const y = (Math.random() - 0.5) * 2000;
       const z = (Math.random() - 0.5) * 2000;
