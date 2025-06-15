@@ -7,7 +7,7 @@ import earth from '../../../assets/earth_4k.jpg';
 import earthBump from '../../../assets/earthbump_4k.jpg';
 import earthSpec from '../../../assets/earthspec_4k.jpg';
 
-function BaseModel() {
+export default function BaseModel() {
   const earthRef = useRef<THREE.Mesh>(null!);
 
   const colorMap = useLoader(THREE.TextureLoader, earth);
@@ -28,5 +28,3 @@ function BaseModel() {
     </mesh>
   );
 }
-
-export default BaseModel;

@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import atmosphereVertexShader from './shaders/atmosphereVertex.glsl';
 import atmosphereFragmentShader from './shaders/atmosphereFragment.glsl';
 
-function Atmosphere() {
+export default function Atmosphere() {
 	return (
 		// <mesh rotation={[0, 0, -23.5 * Math.PI / 180]} scale={[1.1, 1.1, 1.1]}>
 		<mesh scale={[1.1, 1.1, 1.1]}>
@@ -18,5 +18,3 @@ function Atmosphere() {
 		</mesh>
 	);
 }
-
-export default Atmosphere;

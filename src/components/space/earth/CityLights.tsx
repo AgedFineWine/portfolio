@@ -3,7 +3,7 @@ import { useLoader } from '@react-three/fiber';
 
 import lights from '../../../assets/lights_4k.jpg'
 
-function Lights() {
+export default function Lights() {
   const lightsMap = useLoader(THREE.TextureLoader, lights);
 
   return (
@@ -14,5 +14,3 @@ function Lights() {
     </mesh>
   );
 }
-
-export default Lights;

@@ -12,7 +12,7 @@ import Marker from './earth/Marker';
 
 import { useMarker } from '../../context/MarkerContext';
 
-function EarthScene() {
+export default function EarthScene() {
   const { markerHovered } = useMarker();
   const ref = useRef<THREE.Group>(null!);
 
@@ -68,5 +68,3 @@ function EarthScene() {
     </group>
   );
 }
-
-export default EarthScene;

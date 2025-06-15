@@ -5,7 +5,7 @@ import { useRef } from 'react';
 
 import clouds from '../../../assets/clouds_4k.jpg';
 
-function Clouds() {
+export default function Clouds() {
 	const cloudMap = useLoader(THREE.TextureLoader, clouds);
 	const cloudRef = useRef<THREE.Mesh>(null!);
 
@@ -26,5 +26,3 @@ function Clouds() {
 		</mesh>
 	);
 }
-
-export default Clouds;

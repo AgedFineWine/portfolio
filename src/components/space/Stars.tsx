@@ -3,7 +3,7 @@ import { useFrame } from '@react-three/fiber';
 
 import { useRef, useMemo } from 'react';
 
-function Stars() {
+export default function Stars() {
   const starRef = useRef<THREE.Points>(null!);
 
   const starVertices = useMemo(() => {
@@ -36,5 +36,3 @@ function Stars() {
     </>
   )
 }
-
-export default Stars;

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 
 import { useMemo } from 'react';
 
-function OrbitRing({ radius = 50, segments = 128 }) {
+export default function OrbitRing({ radius = 50, segments = 128 }) {
 	const line = useMemo(() => {
 		const curve = new THREE.EllipseCurve(
 			0, 0,
@@ -36,5 +36,3 @@ function OrbitRing({ radius = 50, segments = 128 }) {
 		/>
 	)
 }
-
-export default OrbitRing;

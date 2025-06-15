@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import fresnelVertexShader from './shaders/fresnelVertex.glsl';
 import fresnelFragmentShader from './shaders/fresnelFragment.glsl';
 
-function Fresnel() {
+export default function Fresnel() {
 	const rimHex = 0x0099ff;
 	const facingHex = 0x000000;
 
@@ -26,5 +26,3 @@ function Fresnel() {
 		</mesh>
 	)
 }
-
-export default Fresnel;

@@ -24,7 +24,7 @@ type MarkerProps = {
 	markerHeight?: number;
 }
 
-function Marker({ color, latitude, longitude, markerCaption, markerHeight=0.2 }: MarkerProps) {
+export default function Marker({ color, latitude, longitude, markerCaption, markerHeight=0.2 }: MarkerProps) {
 	const { setMarkerHovered, setMarkerCaption } = useMarker();
 
 	const position = placePointOnGlobe(latitude, longitude);
@@ -46,5 +46,3 @@ function Marker({ color, latitude, longitude, markerCaption, markerHeight=0.2 }:
 		</mesh>
 	);
 }
-
-export default Marker;
