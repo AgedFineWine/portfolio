@@ -1,4 +1,51 @@
 * {
   margin: 0;
   padding: 0;
+
+  /* outline: 1px solid red; */
 }
+
+:root {
+  --primary-font-color: #e7e7e7;
+}
+
+/*
+.boundingBox is a utlity container for responsive web design, everytime
+the viewport touches the boundingBox, the box will shrink
+*/
+.boundingBox {
+  max-width: 1520px;
+}
+
+@media (max-width: 2560px) {
+  .boundingBox {
+    max-width: 1520px;
+  }
+}
+
+/* shrank at 89.583% of 2048px (my desktop screen) */
+@media (max-width: 1835px) {
+  .boundingBox {
+    max-width: 1453px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .boundingBox {
+    max-width: 1140px;
+  }
+}
+
+@media (max-width: 1140px) {
+  .boundingBox {
+    max-width: 902.5px;
+  }
+}
+
+@media (max-width: 902.5px) {
+  .boundingBox {
+    max-width: 715px;
+  }
+}
+
+/* Switch to hamburger menu or something */
