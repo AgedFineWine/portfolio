@@ -31,26 +31,27 @@ export default function EarthScene() {
   const markers = [
     {
       markerCaption: 'My home in New York City, NY',
-      color: 'orangered',
+      color: 'red',
       latitude: 41,
       longitude: 74,
-      markerHeight: 0.1
+      markerHeight: 0.4
     },
     { markerCaption: 'My university in Rochester, NY',
-      color: 'orangered',
+      color: 'turquoise',
       latitude: 42.5,
       longitude: 76.8,
-      markerHeight: 0.125
+      markerHeight: 0.3
     },
   ];
 
+  {/* EarthBaseModel is the actual Earth itself */}
   return (
     <group ref={ref}>
-      <EarthBaseModel /> {/* The actual Earth.tsx itself */}
+      <EarthBaseModel />
       <CityLights />
       <Clouds />
       <Fresnel />
-      <Atmosphere />
+      {/* <Atmosphere /> */}
 
       {/* <Marker sh={sh} sp={sp} latitude={34} longitude={60}/> */} {/** rochester location with tilt */}
       {
