@@ -8,3 +8,8 @@ earth/ folder - contains the models relevant to make the earth like earth city l
 
 MarkerContext/ folder - contains the context for sharing callback functions down 2 levels of components. App.tsx -> EarthScene.tsx -> BaseModel.tsx
 
+Problems that gave me a headache to solve:
+- Earth on right not receiving pointer events
+- Alignment issues with navbar
+- Camera positioning, camera direction, fov (spent a day figuring out)
+- Atmosphere shader not working.
