@@ -30,13 +30,13 @@ export default function EarthScene() {
 
   const markers = [
     {
-      markerCaption: 'My home in New York City, NY',
+      markerCaption: 'Home in New York City, NY',
       color: 'red',
       latitude: 41,
       longitude: 74,
       markerHeight: 0.4
     },
-    { markerCaption: 'My university in Rochester, NY',
+    { markerCaption: 'University in Rochester, NY',
       color: 'turquoise',
       latitude: 42.5,
       longitude: 76.8,
