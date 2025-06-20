@@ -15,6 +15,11 @@ import NavBar from './components/nav/NavBar';
 import Introduction from './components/introduction/Introduction';
 
 import styles from './App.module.css';
+import ProjectSection from './components/projects/ProjectSection';
+import AboutWork from './components/about/AboutWork';
+import goldBorder from './assets/gold_border.svg';
+import SubHeader from './components/subheader/SubHeader';
+import Skills from './components/skills/Skills';
 
 interface MousePosition { x: number; y: number; }
 
@@ -22,8 +27,9 @@ function CameraController() {
   const { camera } = useThree();
   
   useEffect(() => {
-    camera.lookAt(-0.9599585609979925, 0.0022743838413765705, 0.4579251621285705)
+    camera.lookAt(-0.9599585609979925, 0.0022743838413765705, 0.4579251621285705);
   });
+
   return null;
 }
 
@@ -42,21 +48,21 @@ function Scene() {
 
 export default function App() {
   const [markerHovered, setMarkerHovered] = useState<boolean>(false);
-  const [position, setPosition] = useState<MousePosition>({ x: 0, y: 100 });
+  const positionRef = useRef<MousePosition>({ x: 0, y: 0});
   const [markerCaption, setMarkerCaption] = useState<string>('');
 
   const ref = useRef<HTMLDivElement>(null!);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-    setPosition({
-      x: event.clientX,
-      y: event.clientY
-    });
+    positionRef.current.x = event.clientX;
+    positionRef.current.y = event.clientY;
   }
 
   return (
     <>
-      <div className={styles.canvasContainer} ref={ref} onMouseMove={(e) => handleMouseMove(e)}>
+      <div className={styles.canvasContainer} ref={ref}
+      onMouseMove={(e) => handleMouseMove(e)}
+      >
         <MarkerContext.Provider value={{ markerHovered: markerHovered, setMarkerHovered, setMarkerCaption }}> {/* Set/define necessar context here */}
           <Canvas camera={{ position: [0.8370747744283268, 0.7071858469614015, 5.070274999307938], fov: 30 }} className={styles.canvas}>
             {/* <CameraDebugger /> */}
@@ -69,7 +75,7 @@ export default function App() {
             className={styles.markerCaptionContainer}
             style={{
               display: markerHovered ? 'inline-block' : 'none',
-              transform: `translate(${position.x}px, ${position.y - window.innerHeight}px)`,
+              transform: `translate(${positionRef.current.x}px, ${positionRef.current.y - window.innerHeight}px)`,
             }}>
             {markerCaption}
           </div>
@@ -81,7 +87,17 @@ export default function App() {
             <Introduction />
           </div>
         </div>
+      </div>
+      
+      <div className={styles.mainContent}>
+        <SubHeader singleWord={'Intro'} shortText={'About My Work'} border={goldBorder} />
+        <AboutWork />
 
+        <SubHeader singleWord={'Portfolio'} shortText={'Explore My Latest Works'} border={goldBorder} />
+        <ProjectSection />
+
+        <SubHeader singleWord={'Skills'} shortText={'The Skillset Behind My Work'} border={goldBorder} />
+        <Skills />
       </div>
     </>
   );
