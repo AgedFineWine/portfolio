@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 
 import { useMarker } from '../../../context/MarkerContext';
 
@@ -30,7 +30,11 @@ export default function Marker({ color, latitude, longitude, markerCaption, mark
 	const position = placePointOnGlobe(latitude, longitude);
 	const ref = useRef<THREE.Mesh>(null!);
 
-	if (ref.current) ref.current.lookAt(new THREE.Vector3(0, 0, 0));
+	useEffect(() => {
+		if (ref.current) {
+			ref.current.lookAt(new THREE.Vector3(0, 0, 0));
+		}
+	}, []);
 
 	return (
 		<mesh position={position} ref={ref} onPointerOver={() => {
@@ -42,7 +46,7 @@ export default function Marker({ color, latitude, longitude, markerCaption, mark
 			}}
 		>
 			<boxGeometry args={[0.02, 0.02, markerHeight]} />
-			<meshBasicMaterial color={color} opacity={0.5} transparent/> {/* Keyword transparent must be called for opacity to work */}
+			<meshBasicMaterial color={color} opacity={0.6} transparent/> {/* Keyword transparent must be called for opacity to work */}
 		</mesh>
 	);
 }
