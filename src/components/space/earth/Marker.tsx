@@ -30,6 +30,8 @@ export default function Marker({ color, latitude, longitude, markerCaption, mark
 	const position = placePointOnGlobe(latitude, longitude);
 	const ref = useRef<THREE.Mesh>(null!);
 
+	// Marker is always looking at the center of the earth, though it is inverted.
+	// This ensures that the marker is pointing at the vertex normal of the earth.
 	useEffect(() => {
 		if (ref.current) {
 			ref.current.lookAt(new THREE.Vector3(0, 0, 0));
