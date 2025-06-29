@@ -8,7 +8,7 @@ export default function Stars() {
 
   const starVertices = useMemo(() => {
     const vertices = [];
-    for (let i = 0; i < 4000; i++) {
+    for (let i = 0; i < 50000; i++) {
       const x = (Math.random() - 0.5) * 2000;
       const y = (Math.random() - 0.5) * 2000;
       const z = (Math.random() - 0.5) * 2000;
@@ -31,7 +31,7 @@ export default function Stars() {
             args={[starVertices, 3]}
           />
         </bufferGeometry>
-        <pointsMaterial color={0xffffff}></pointsMaterial>
+        <pointsMaterial color={0xd0a153}></pointsMaterial>
       </points>
     </>
   )
