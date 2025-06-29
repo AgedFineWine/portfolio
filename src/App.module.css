@@ -22,7 +22,7 @@ The UI will belong inside of this container */
     width: 100%;
     /* margin-top: 26vh; */
     position: absolute;
-    top: 50%;
+    top: 47%;
     transform: translateY(-60%);
 }
 
@@ -35,7 +35,15 @@ The UI will belong inside of this container */
 }
 
 .canvas {
-    background-color: #000;
+    background-color: var(--primary-background-color);
+    width: 100%;
+    height: 100%;
+}
+
+.mainContent {
+    /* padding-top: auto; */
+    /* box-sizing: border-box; */
+    background-color: var(--primary-background-color);
     width: 100%;
     height: 100%;
 }
