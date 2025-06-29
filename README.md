@@ -13,3 +13,12 @@ Problems that gave me a headache to solve:
 - Alignment issues with navbar
 - Camera positioning, camera direction, fov (spent a day figuring out)
 - Atmosphere shader not working.
+
+6/17:
+- Finished on landing page but not responsive/not interactive enough/ lacks in color department
+6/18:
+- Worked on project section/code reusuability
+6/19-6/25:
+- Worked on the project a little, wanted to create a more cozy theme but am not sure how to do so.
+6/29
+- Working on responsiveness/ MVP.
