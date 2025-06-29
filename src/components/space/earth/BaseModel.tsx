@@ -3,9 +3,9 @@ import { useLoader } from '@react-three/fiber';
 
 import { useRef } from 'react';
 
-import earth from '../../../assets/earth_4k.jpg';
-import earthBump from '../../../assets/earthbump_4k.jpg';
-import earthSpec from '../../../assets/earthspec_4k.jpg';
+import earth from '../../../assets/earth/earth_4k.jpg';
+import earthBump from '../../../assets/earth/earthbump_4k.jpg';
+import earthSpec from '../../../assets/earth/earthspec_4k.jpg';
 
 export default function BaseModel() {
   const earthRef = useRef<THREE.Mesh>(null!);

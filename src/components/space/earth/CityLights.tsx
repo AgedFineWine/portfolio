@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { useLoader } from '@react-three/fiber';
 
-import lights from '../../../assets/lights_4k.jpg'
+import lights from '../../../assets/earth/lights_4k.jpg'
 
 export default function Lights() {
   const lightsMap = useLoader(THREE.TextureLoader, lights);
