@@ -1,51 +1,137 @@
-* {
-  margin: 0;
-  padding: 0;
+@import "tailwindcss";
 
-  /* outline: 1px solid red; */
+* {
+	/* margin: 0;
+	padding: 0; */
+
+	/* outline: 1px solid red; */
 }
+
+@theme {
+	--color-dark-grey: #1c1c1c;
+	--color-grey-rim: rgb(59, 59, 59);
+	--color-muted-grey: #bebcbc;
+	--color-tag-grey: rgb(56, 56, 56);
+}
+
 
 :root {
-  --primary-font-color: #e7e7e7;
+	--primary-header-color: #fcfcfc;
+	--primary-font-color: #e7e7e7;
+	--primary-background-color: #020202;
+	--primary-text-font-family: Inter, sans-serif;
+	--text-small: 0.875rem;
+	/* --muted-grey: oklch(.708 0 0); */
+	--color-muted-grey: #bebcbc;
+
 }
 
+/* html {
+	background-color: var(--primary-background-color);
+} */
+
+/* ==================================================== */
+/* Utility classes =====================================*/
+/* ==================================================== */
+.introductoryTextUtil {
+	color: var(--muted-grey);
+	font-family: var(--primary-text-font-family);
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.viewLinksUtil {
+	/* color: #fff; */
+	font-family: var(--primary-text-font-family);
+	font-size: 1.125rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+	/* text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-skip-ink: auto;
+	text-decoration-thickness: auto;
+	text-underline-offset: auto;
+	text-underline-position: from-font; */
+}
+
+.viewLinksUtil a,
+.viewLinksUtil a:visited {
+	/* color: var(--primary-header-color); */
+	color: var(--muted-grey);
+	text-decoration: none;
+}
+
+/* ==================================================== */
+/* Media Queries ====================================== */
+/* ==================================================== */
 /*
 .boundingBox is a utlity container for responsive web design, everytime
 the viewport touches the boundingBox, the box will shrink
 */
+/* shrank at 89.583% of 2048px (my desktop screen) */
 .boundingBox {
-  max-width: 1520px;
+	max-width: 1520px;
+	/* margin-right: min(10%); */
+	/* margin-left: min(10%); */
+	padding-left: min(50px);
+	padding-right: min(50px);
 }
+
 
 @media (max-width: 2560px) {
-  .boundingBox {
-    max-width: 1520px;
-  }
+	.boundingBox {
+		max-width: 1520px;
+	}
 }
 
-/* shrank at 89.583% of 2048px (my desktop screen) */
 @media (max-width: 1835px) {
-  .boundingBox {
-    max-width: 1453px;
-  }
+	.boundingBox {
+		max-width: 1453px;
+	}
 }
 
-@media (max-width: 1440px) {
-  .boundingBox {
-    max-width: 1140px;
-  }
+@media (max-width: 1453px) {
+	.aboutWork {
+		grid-template-columns: minmax(0, 1fr);
+	}
+	.aboutWork > :first-child {
+		width: 70%;
+		margin-bottom: 70px;
+	}
+
 }
 
-@media (max-width: 1140px) {
-  .boundingBox {
-    max-width: 902.5px;
-  }
+@media (max-width: 1280px) {
+	.projectSection {
+		columns: 1;
+	}
 }
 
-@media (max-width: 902.5px) {
-  .boundingBox {
-    max-width: 715px;
-  }
+@media (max-width: 768px) {
+	.canvasContainer {
+		height: 150vh;
+	}
 }
+
+/* @media (max-width: 1440px) {
+	.boundingBox {
+		max-width: 1140px;
+	}
+} */
+
+/* @media (max-width: 1140px) {
+	.boundingBox {
+		max-width: 902.5px;
+	}
+} */
+
+/* @media (max-width: 902.5px) {
+	.boundingBox {
+		max-width: 715px;
+	}
+} */
 
 /* Switch to hamburger menu or something */
