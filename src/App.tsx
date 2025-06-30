@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
-import { Cone, OrbitControls, PerspectiveCamera } from '@react-three/drei';
-import gsap from 'gsap';
+// import { Cone, OrbitControls, PerspectiveCamera } from '@react-three/drei';
+// import gsap from 'gsap';
 
 import { MarkerContext } from './context/MarkerContext';
 
@@ -36,12 +36,10 @@ function CameraController() {
   return null;
 }
 
-function Scene(props?: any) {
+function Scene() {
   return (
     <>
-      <CameraController
-      // {...props}
-      />
+      <CameraController />
       <Sun />
       <EarthScene />
       <OrbitRing />
