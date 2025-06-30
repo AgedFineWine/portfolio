@@ -13,6 +13,13 @@ Problems that gave me a headache to solve:
 - Alignment issues with navbar
 - Camera positioning, camera direction, fov (spent a day figuring out)
 - Atmosphere shader not working.
+- Finding the right decorations to make it more comfy on the eyes
+- Migrating to Tailwind, dealing with media queries.
+
+Need:
+- gsap animations
+- search lights
+- react optimizations
 
 6/17:
 - Finished on landing page but not responsive/not interactive enough/ lacks in color department
