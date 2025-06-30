@@ -96,7 +96,7 @@ export default function App() {
       </div>
 
       <div className={`relative bg-[var(--primary-background-color)] w-full h-full`}>
-		<div className={`absolute h-[85px] top-0 transform translate-y-[-50%] w-[100vw] bg-black/50 backdrop-blur-[3px] z-[999]
+		<div className={`absolute h-[85px] top-0 transform translate-y-[-50%] w-full bg-black/50 backdrop-blur-[3px] z-[999]
       mask-[image:linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,0,0,0.7)_20%,rgba(0,0,0,1)_40%,rgba(0,0,0,1)_60%,rgba(0,0,0,1)_100%)]
       pointer-events-none`}></div>
         {/* <SubHeader singleWord={'Intro'} shortTextBefore={'About My '} emphasis={'Works'} /> */}
