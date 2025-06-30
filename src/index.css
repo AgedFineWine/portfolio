@@ -114,6 +114,19 @@ the viewport touches the boundingBox, the box will shrink
 	.canvasContainer {
 		height: 150vh;
 	}
+
+	.aboutWork > :first-child {
+		width: 100%;
+	}
+
+	.introductionContainer > header {
+		width: 100%;
+	}
+
+	.introductionContainer {
+		top: 25%;
+	}
+
 }
 
 /* @media (max-width: 1440px) {

@@ -36,7 +36,7 @@ export default function ProjectSection() {
 	];
 	
 	return (
-		<section className={`mb-14 mt-0 mx-auto boundingBox`}>
+		<section className={`mb-35 mt-0 mx-auto boundingBox`}>
 			<div className={`columns-2 gap-x-15 projectSection`}>
         {/* previously gap-x-8 */}
 				{projects.map((project, index) => (

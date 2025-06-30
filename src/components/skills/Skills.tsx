@@ -31,7 +31,7 @@ export default function Skills() {
 			<h2>Skills</h2>
 			<div>
 				{/* Temporary use this style because I can't think of another way to do this */}
-				<div className={`flex flex-col items-center`}>
+				<div className={`flex flex-col items-center mb-15`}>
 					<h3 className={`text-white font-[Inter] font-normal text-xl text-center`}>Programming Languages</h3>
 					<ul className={`flex gap-4 flex-wrap justify-center`}>
 						{programmingLanguages.map((langauge) => (
@@ -41,7 +41,7 @@ export default function Skills() {
 						))}
 					</ul>
 				</div>
-				<div className={`flex flex-col items-center`}>
+				<div className={`flex flex-col items-center mb-15`}>
 					<h3 className={`text-white font-[Inter] font-normal text-xl text-center`}>Fullstack Libraries/Frameworks</h3>
 					<ul className={`flex gap-4 flex-wrap justify-center`}>
 						{fullstack.map((fullstack) => (
@@ -51,7 +51,7 @@ export default function Skills() {
 						))}
 					</ul>
 				</div>
-				<div className={`flex flex-col items-center`}>
+				<div className={`flex flex-col items-center mb-15`}>
 					<h3 className={`text-white font-[Inter] font-normal text-xl text-center`}>Tools</h3>
 					<ul className={`flex gap-4 flex-wrap justify-center`}>
 						{tools.map((tool) => (

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useFrame } from '@react-three/fiber';
 
 import EarthBaseModel from './earth/BaseModel';
@@ -15,9 +15,20 @@ import { useMarker } from '../../context/MarkerContext';
 export default function EarthScene() {
   const { markerHovered } = useMarker();
   const ref = useRef<THREE.Group>(null!);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Check screen size for responsive behavior
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+    
+  }, []);
 
   useFrame(() => {
-    if (!markerHovered) ref.current.rotation.y += 0.001;
+    if (!markerHovered) {
+      // Slower rotation on mobile for better performance
+      const rotationSpeed = isMobile ? 0.0005 : 0.001;
+      ref.current.rotation.y += rotationSpeed;
+    }
   });
 
   // if (ref.current) {
@@ -51,21 +62,19 @@ export default function EarthScene() {
       <CityLights />
       <Clouds />
       <Fresnel />
-      {/* <Atmosphere /> */}
+      <Atmosphere />
 
       {/* <Marker sh={sh} sp={sp} latitude={34} longitude={60}/> */} {/** rochester location with tilt */}
-      {
-        markers.map((marker, index) => (
-          <Marker
-            key={index}
-            markerCaption={marker.markerCaption}
-            color={marker.color}
-            latitude={marker.latitude}
-            longitude={marker.longitude}
-            markerHeight={marker.markerHeight}
-          />
-        ))
-      }
+      {markers.map((marker, index) => (
+        <Marker
+          key={index}
+          markerCaption={marker.markerCaption}
+          color={marker.color}
+          latitude={marker.latitude}
+          longitude={marker.longitude}
+          markerHeight={marker.markerHeight}
+        />
+      ))}
     </group>
   );
 }

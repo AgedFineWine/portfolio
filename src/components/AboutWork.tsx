@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutWork() {
   return (
-    <section className="py-20 mb-50 mx-auto boundingBox">
+    <section className="py-20 mb-35 mx-auto boundingBox">
 
       <div className="grid grid-cols-2 justify-items-center aboutWork">
         <div>

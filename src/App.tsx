@@ -20,7 +20,6 @@ import SubHeader from './components/SectionHeader';
 import Skills from './components/skills/Skills';
 import Footer from './components/Footer';
 
-
 interface MousePosition { x: number; y: number; }
 
 function CameraController() {
@@ -29,6 +28,9 @@ function CameraController() {
   useEffect(() => {
     camera.lookAt(-0.9599585609979925, 0.0022743838413765705, 0.4579251621285705);
 
+    if (innerWidth < 768) {
+      camera.lookAt(0, 1, 0);
+    }
   });
 
   return null;
@@ -89,13 +91,16 @@ export default function App() {
         <div className={`flex flex-col items-center pointer-events-none absolute top-0
           right-0 bottom-auto left-0 h-full`}>
           <NavBar />
-          <div className={`flex w-full absolute top-[47%] transform translate-y-[-60%] boundingBox`}>
+          <div className={`flex w-full absolute top-[47%] transform translate-y-[-60%] boundingBox introductionContainer`}>
             <Introduction />
           </div>
         </div>
       </div>
 
-      <div className={`bg-[var(--primary-background-color)] w-full h-full`}>
+      <div className={`relative bg-[var(--primary-background-color)] w-full h-full`}>
+		<div className={`absolute h-[85px] top-0 transform translate-y-[-50%] w-[100vw] bg-black/50 backdrop-blur-[3px] z-[999]
+      mask-[image:linear-gradient(to_bottom,rgba(0,0,0,0)_0%,rgba(0,0,0,0.7)_20%,rgba(0,0,0,1)_40%,rgba(0,0,0,1)_60%,rgba(0,0,0,1)_100%)]
+      pointer-events-none`}></div>
         {/* <SubHeader singleWord={'Intro'} shortTextBefore={'About My '} emphasis={'Works'} /> */}
         <AboutWork />
 
