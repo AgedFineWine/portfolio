@@ -15,7 +15,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <div className="flex flex-col items-center space-y-4 lg:items-end">
+          <div id="contact" className="flex flex-col items-center space-y-4 lg:items-end">
             <h3 className="text-lg font-medium tracking-wide text-white">
               Contact
             </h3>

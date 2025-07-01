@@ -6,12 +6,13 @@ type SectionHeaderProps = {
 	centered?: boolean;
 
 	emphasis?: string;
+	id?: string;
 }
 
 // Centered means that the subheader is not centered
-export default function SectionHeader({ singleWord, shortTextBefore, shortTextAfter, centered, emphasis }: SectionHeaderProps) {
+export default function SectionHeader({ id='', singleWord, shortTextBefore, shortTextAfter, centered, emphasis }: SectionHeaderProps) {
 	if (centered) return (
-		<div className="boundingBox mx-auto text-center my-14">
+		<div id={id} className="boundingBox mx-auto text-center my-14">
 			<span className="block text-[var(--primary-header-color)] text-center mb-1 mx-auto text-lg">
         {singleWord}
       </span>
@@ -33,7 +34,7 @@ export default function SectionHeader({ singleWord, shortTextBefore, shortTextAf
    * If not centered, then we customize it differently.
    */
 	return (
-		<div className={`mx-auto my-0 text-center w-full`}>
+		<div id={id} className={`mx-auto my-0 text-center w-full`}>
 			<span className={`block text-[var(--primary-header-color)] text-center mx-auto mb-1 text-lg`}>
         {singleWord}
       </span>

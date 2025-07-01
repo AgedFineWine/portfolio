@@ -102,10 +102,10 @@ export default function App() {
         {/* <SubHeader singleWord={'Intro'} shortTextBefore={'About My '} emphasis={'Works'} /> */}
         <AboutWork />
 
-        <SubHeader centered singleWord={'Portfolio'} shortTextBefore={'Explore My '} emphasis={'Latest Works'} />
+        <SubHeader id="projectSection" centered singleWord={'Portfolio'} shortTextBefore={'Explore My '} emphasis={'Latest Works'} />
         <ProjectSection />
 
-        <SubHeader centered singleWord={'Skills'} shortTextBefore={'The '} emphasis={'Skillset'} shortTextAfter={' Behind My Work'} />
+        <SubHeader id="skills" centered singleWord={'Skills'} shortTextBefore={'The '} emphasis={'Skillset'} shortTextAfter={' Behind My Work'} />
         <Skills />
 
 
