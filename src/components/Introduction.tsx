@@ -22,8 +22,8 @@ export default function Introduction() {
 				projects, so I encourage you to read them!
 			</p>
 			<ul className={`flex gap-x-6 pointer-events-auto viewLinksUtil`}>
-				<li><a href="">&gt; Take a look</a></li>
-				<li><a href="">&gt; View resume</a></li>
+				<li><a href="#aboutWork">&gt; Take a look</a></li>
+				{/* <li><a href="">&gt; View resume</a></li> */}
 			</ul>
 		</header>
 	);
