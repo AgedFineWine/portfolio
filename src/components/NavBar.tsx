@@ -25,7 +25,7 @@ export default function NavBar() {
 			{/* Desktop Navigation */}
 			<ul className="max-w-[526px] justify-between items-start hidden md:flex">
 				<li><a className="px-6 text-white no-underline hover:text-gray-300 transition-colors duration-200" href="#home" onClick={closeMenu}>Home</a></li>
-				<li><a className="px-6 text-white no-underline hover:text-gray-300 transition-colors duration-200" href="#projects" onClick={closeMenu}>Projects</a></li>
+				<li><a className="px-6 text-white no-underline hover:text-gray-300 transition-colors duration-200" href="#projectSection" onClick={closeMenu}>Projects</a></li>
 				{/* <li><a className="px-6 text-white no-underline" href="">Experience</a></li> */}
 				<li><a className="px-6 text-white no-underline hover:text-gray-300 transition-colors duration-200" href="#skills" onClick={closeMenu}>Skills</a></li>
 				<li><a className="px-6 text-white no-underline hover:text-gray-300 transition-colors duration-200" href="#contact" onClick={closeMenu}>Contact</a></li>
@@ -70,7 +70,7 @@ export default function NavBar() {
 						<li>
 							<a 
 								className="text-white text-4xl font-light no-underline hover:text-gray-300 transition-colors duration-200 block py-4" 
-								href="#projects" 
+								href="#projectSection" 
 								onClick={closeMenu}>
 								Projects
 							</a>
