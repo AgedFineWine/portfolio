@@ -1,4 +1,4 @@
-import type { ProjectProps } from './ProjectEnum';
+import type { ProjectProps } from './ProjectType';
 
 export default function Project({ description, name, tags, githubLink, demoLink, img, showDemo=true }: ProjectProps) {
 	return (

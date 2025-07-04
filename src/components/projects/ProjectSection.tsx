@@ -2,7 +2,7 @@ import pathfinderImg from '../../assets/projects/pathfinder.png';
 import port from '../../assets/projects/port.png';
 import carousel from '../../assets/projects/carousel.png';
 
-import type { ProjectProps } from './ProjectEnum';
+import type { ProjectProps } from './ProjectType';
 import Project from './Project';
 
 export default function ProjectSection() {
