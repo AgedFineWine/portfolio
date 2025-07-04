@@ -20,6 +20,9 @@ export default function Introduction() {
 				I love creating projects that are both fun and meaningful, whether it's tackling complex technical
 				challenges or creating stunning graphics. I document my journey building
 				projects, so I encourage you to read them!
+        <br />
+        <br />
+        This page is still a work in progress, see the github repo for more info.
 			</p>
 			<ul className={`flex gap-x-6 pointer-events-auto viewLinksUtil`}>
 				<li><a href="#aboutWork">&gt; Take a look</a></li>
