@@ -2,17 +2,18 @@ import pathfinderImg from '../../assets/projects/pathfinder.png';
 import port from '../../assets/projects/port.png';
 import carousel from '../../assets/projects/carousel.png';
 
+import type { ProjectProps } from './ProjectEnum';
 import Project from './Project';
 
 export default function ProjectSection() {
 
-	const projects = [
+	const projects: ProjectProps[] = [
 		{
 			name: 'Pathfinder Visualizer',
 			description: 'A visualizer for pathfinding algorithms. It allows users to see how different algorithms work in real-time by visualizing the pathfinding process on a grid. Users can interact with the grid to set start and end points, as well as obstacles.',
-			githubLink: 'github.com/agedfinewine/pathfinder-visualizer',
+			githubLink: 'https://github.com/agedfinewine/pathfinder-visualizer',
 			demoLink: '',
-			tags: ['Web Design', 'Full Stack', 'CRUD', 'Algorithms'],
+			// tags: ['Web Design', 'Full Stack', 'CRUD', 'Algorithms'],
 			img: pathfinderImg,
       showDemo: false,
 
@@ -20,18 +21,18 @@ export default function ProjectSection() {
 		{
 			name: 'Image Carousel',
 			description: 'A small project I built because I wanted to use a circular doubly linked list. Very small project.',
-			githubLink: 'github.com/agedfinewine/portfolio',
-			demoLink: '',
-			tags: ['Web Design', 'Data Structures'],
+			githubLink: 'https://github.com/agedfinewine/image-carousel',
+			demoLink: 'https://image-carousel-8la.pages.dev/',
+			// tags: ['Web Design', 'Data Structures'],
 			img: carousel
 		},
 		{
 			name: 'Portfolio Website',
 			description: 'This is the website you are currently on! Built using TypeScript React, Tailwind CSS, and Vite.',
-			githubLink: 'github.com/agedfinewine/portfolio',
-			demoLink: '',
-			tags: ['Web Design', 'Frontend'],
-			img: port
+			githubLink: 'https://github.com/agedfinewine/portfolio',
+			demoLink: 'https://portfolio-bu4.pages.dev/',
+			// tags: ['Web Design', 'Frontend'],
+			img: port,
 		}
 	];
 	
@@ -45,8 +46,8 @@ export default function ProjectSection() {
 						name={project.name}
 						description={project.description}
 						githubLink={project.githubLink}
-						tags={project.tags}
-						demo={project.demoLink}
+						demoLink={project.demoLink}
+						// tags={project.tags}
 						img={project.img}
             showDemo={project.showDemo}
 					/>

@@ -1,16 +1,6 @@
-// import styles from './Project.module.css';
+import type { ProjectProps } from './ProjectEnum';
 
-type ProjectProps = {
-	description?: string;
-	name: string;
-	tags?: string[];
-	githubLink?: string;
-	demo?: string;
-	img: string;
-	showDemo?: boolean;
-}
-
-export default function Project({ description, name, tags, githubLink, demo, img, showDemo=true }: ProjectProps) {
+export default function Project({ description, name, tags, githubLink, demoLink, img, showDemo=true }: ProjectProps) {
 	return (
 		<div className={`break-inside-avoid mb-16`}>
 			<div className={`w-full mb-5`}>
@@ -40,8 +30,8 @@ export default function Project({ description, name, tags, githubLink, demo, img
 				}
 			</div>
 			<div className={`flex gap-x-5`}>
-				<a href={githubLink} className={`text-white font-inter font-normal text-base`}>View on GitHub &gt;</a>
-				{showDemo && <a href={demo} className={`text-white font-inter font-normal text-base`}>Live demo &gt;</a>}
+				<a href={githubLink} className={`text-white font-inter font-normal text-base`} target="_blank" rel="noopener">View on GitHub &gt;</a>
+				{showDemo && <a href={demoLink} className={`text-white font-inter font-normal text-base`} target="_blank" rel="noopener">Live demo &gt;</a>}
 			</div>
 		</div>
 	)
