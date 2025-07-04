@@ -80,7 +80,6 @@ the viewport touches the boundingBox, the box will shrink
 	padding-right: min(50px);
 }
 
-
 @media (max-width: 2560px) {
 	.boundingBox {
 		max-width: 1520px;
@@ -127,6 +126,13 @@ the viewport touches the boundingBox, the box will shrink
 		top: 25%;
 	}
 
+}
+
+@media (max-width: 426px) {
+	.boundingBox {
+		padding-left: 16px;
+		padding-right: 16px;
+	}
 }
 
 /* @media (max-width: 1440px) {
